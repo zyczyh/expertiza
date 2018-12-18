@@ -377,8 +377,8 @@ class QuestionnairesController < ApplicationController
     @participant = AssignmentParticipant.find(params[:id])
     @team = Team.find(@participant.team.id)
     if @team.supplementary_review_questionnaire_id.nil?
-      @questionnaire = Questionnaire.create(privete: false, name: "supplementary_review_questionnaire_" + @team.id.to_s,
-        instructor_id: @team_id, min_question_score: 0, max_question_score: 5, type: "Questionnaire", display_type: "Review"
+      @questionnaire = Questionnaire.new(name: "supplementary_review_questionnaire_" + @team.id.to_s,
+        instructor_id: @team_id, min_question_score: 0, max_question_score: 5, type: "SupplementaryQuestionnaire", display_type: "Review",
         instruction_loc: Questionnaire::DEFAULT_QUESTIONNAIRE_URL)
       if @questionnaire.save
         @team.supplementary_review_questionnaire_id = @questionnaire.id
